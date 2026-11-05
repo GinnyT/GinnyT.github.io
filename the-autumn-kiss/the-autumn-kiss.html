@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Autumn Kiss — поздравление</title>
+<meta name="description" content="Тёплое осеннее поздравление для самых близких.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fdf6ee;
+    --paper:#fffaf3;
+    --amber:#e8a54b;
+    --rust:#c4622d;
+    --burgundy:#8e3b2f;
+    --olive:#7a7a4f;
+    --ink:#3d2b23;
+    --soft:#6b5244;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Montserrat',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  .serif{font-family:'Cormorant Garamond',serif}
+
+  /* ---------- общая обёртка ---------- */
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+
+  /* ---------- фон: мягкие осенние пятна ---------- */
+  .bg-leaves{position:fixed;inset:0;pointer-events:none;z-index:0}
+  .bg-leaves::before,.bg-leaves::after{
+    content:"";position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;
+  }
+  .bg-leaves::before{width:55vw;height:55vw;top:-18vw;right:-15vw;background:radial-gradient(circle,#f3c98b,transparent 70%)}
+  .bg-leaves::after{width:50vw;height:50vw;bottom:-15vw;left:-12vw;background:radial-gradient(circle,#d98a5f,transparent 70%)}
+
+  main{position:relative;z-index:1}
+
+  /* ---------- шапка ---------- */
+  header{padding:72px 0 40px;text-align:center}
+  .eyebrow{
+    letter-spacing:.35em;text-transform:uppercase;
+    font-size:.72rem;color:var(--rust);font-weight:600;
+  }
+  h1{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(3rem,9vw,5.2rem);
+    font-weight:500;
+    line-height:1.05;
+    margin:18px 0 8px;
+    color:var(--burgundy);
+  }
+  h1 em{font-style:italic;color:var(--amber)}
+  .subtitle{color:var(--soft);font-weight:300;font-size:1.05rem;max-width:480px;margin:14px auto 0}
+  .divider{
+    width:64px;height:2px;background:var(--amber);
+    margin:36px auto 0;border-radius:2px;
+  }
+
+  /* ---------- секции-карточки ---------- */
+  section{padding:36px 0}
+  .card{
+    background:var(--paper);
+    border-radius:22px;
+    padding:56px 44px;
+    box-shadow:0 24px 60px -30px rgba(140,80,40,.25);
+    border:1px solid rgba(196,98,45,.12);
+    position:relative;
+  }
+  .card::before{
+    content:"❦";
+    position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+    background:var(--cream);color:var(--amber);
+    padding:0 16px;font-size:1.1rem;
+  }
+  .greeting{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(1.9rem,4.6vw,2.6rem);
+    font-weight:500;line-height:1.2;
+    color:var(--burgundy);
+  }
+  .greeting span{font-style:italic;color:var(--amber)}
+  .body-text{margin-top:22px;color:var(--soft);font-weight:300;font-size:1.02rem}
+  .body-text p + p{margin-top:16px}
+  .signature{
+    margin-top:30px;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;font-size:1.5rem;color:var(--rust);
+  }
+
+  /* ---------- детская карточка ---------- */
+  .card.kid{background:linear-gradient(160deg,#fff6e9,#fdeedd)}
+  .card.kid::before{color:var(--olive)}
+
+  /* ---------- подарок ---------- */
+  details.gift{
+    margin-top:8px;
+    background:linear-gradient(150deg,#7a3b2e,#5d2b23);
+    color:#fdf2e4;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 26px 60px -25px rgba(90,40,25,.55);
+  }
+  details.gift summary{
+    list-style:none;cursor:pointer;
+    padding:34px 44px;text-align:center;
+    transition:background .3s;
+  }
+  details.gift summary::-webkit-details-marker{display:none}
+  details.gift summary:hover{background:rgba(255,255,255,.05)}
+  .gift-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(1.8rem,4.5vw,2.4rem);
+    color:#ffd9a0;
+  }
+  .gift-hint{
+    margin-top:10px;font-size:.82rem;letter-spacing:.25em;
+    text-transform:uppercase;color:rgba(253,242,228,.75);font-weight:500;
+  }
+  .gift-hint::after{content:" ↓";transition:transform .3s}
+  details[open] .gift-hint::after{content:" ↑"}
+  .gift-body{padding:8px 44px 44px;text-align:center}
+  .gift-body .ribbon{
+    font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:1.35rem;color:#ffd9a0;margin-bottom:22px;
+  }
+  .gift-card{
+    background:#fdf2e4;color:var(--ink);
+    border-radius:16px;padding:30px 28px;
+    text-align:left;
+  }
+  .gift-card h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.5rem;color:var(--burgundy);font-weight:600;
+    margin-bottom:16px;
+  }
+  .gift-card dl{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:.95rem}
+  .gift-card dt{color:var(--rust);font-weight:600;white-space:nowrap}
+  .gift-card dd{color:var(--soft);font-weight:300;word-break:break-word}
+  .gift-note{margin-top:18px;font-size:.8rem;color:var(--soft);font-weight:300;font-style:italic}
+
+  /* ---------- подвал ---------- */
+  footer{text-align:center;padding:64px 0 48px;color:var(--soft);font-weight:300;font-size:.85rem}
+  footer .serif{font-size:1.6rem;color:var(--burgundy);margin-bottom:8px}
+
+  /* ---------- появление при скролле ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.visible{opacity:1;transform:none}
+
+  @media (max-width:560px){
+    .card{padding:44px 26px}
+    details.gift summary{padding:28px 26px}
+    .gift-body{padding:8px 26px 34px}
+  }
+</style>
+</head>
+<body>
+<div class="bg-leaves"></div>
+<main>
+
+  <header>
+    <div class="wrap reveal">
+      <div class="eyebrow">осень · тепло · семья</div>
+      <h1>The <em>Autumn</em> Kiss</h1>
+      <p class="subtitle">Небольшая страница — для двух самых важных людей в моей жизни.</p>
+      <div class="divider"></div>
+    </div>
+  </header>
+
+  <div class="wrap">
+
+    <section>
+      <div class="card reveal">
+        <div class="greeting">Любимой <span>жене</span></div>
+        <div class="body-text">
+          <p>Есть дни, которые хочется просто остановить и пересматривать, как любимый фильм. Сегодня — один из них. Спасибо тебе за то, что рядом с тобой даже обычный четверг ощущается как праздник, а осень — не время увядать, а время укутываться в плед, обнимать друг друга и пить чай, который остыл, потому что мы слишком долго разговаривали.</p>
+          <p>Ты — моё самое смелое решение и моя самая тихая гавань. Пусть в этом сезоне у тебя будет больше поводов улыбаться, чем поводов уставать, а все твои «как же я вымоталась сегодня» заканчиваются фразой «но с тобой — хорошо».</p>
+        </div>
+        <div class="signature">— с любовью, навсегда твой муж</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="card kid reveal">
+        <div class="greeting">Лучшему <span>сыну</span></div>
+        <div class="body-text">
+          <p>Эй, герой! Осень — это когда мир превращается в огромную оранжевую карту сокровищ: листья шуршат, как фанфары, а каждое каштановое дерево прячет свою тайну. Ты делаешь нашу семью громче, смешнее и настоящей — и это лучшая суперспособность, которую я знаю.</p>
+          <p>Расти, мечтай, задавай тысячу вопросов в минуту — мы всегда рядом, чтобы выслушать каждый.</p>
+        </div>
+        <div class="signature">— твой папа</div>
+      </div>
+    </section>
+
+    <section>
+      <details class="gift reveal">
+        <summary>
+          <div class="gift-title">А теперь — подарок</div>
+          <div class="gift-hint">нажми, чтобы открыть</div>
+        </summary>
+        <div class="gift-body">
+          <p class="ribbon">Наш семейный отпуск уже забронирован ✨</p>
+          <div class="gift-card">
+            <h3>Детали бронирования</h3>
+            <dl>
+              <dt>Отель:</dt><dd>СОЛНЕЧНЫЙ ParkHotel& SPA</dd>
+              <dt>Номер:</dt><dd>STUD-1</dd>
+              <dt>Даты:</dt><dd>15.12.2026 16:00 — 17.12.2026 12:00</dd>
+              <dt>Номер брони:</dt><dd>415929</dd>            
+            </dl>
+            <p class="gift-note">Зай, теплого и уютного отыха тебе.</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="serif">С любовью, муж</div>
+    <div>осенью 2026 · the-autumn-kiss</div>
+  </footer>
+
+</main>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: .15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
