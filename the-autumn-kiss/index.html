@@ -150,6 +150,29 @@
   footer{text-align:center;padding:64px 0 48px;color:var(--soft);font-weight:300;font-size:.85rem}
   footer .serif{font-size:1.6rem;color:var(--burgundy);margin-bottom:8px}
 
+  /* ---------- счётчики ---------- */
+  .countdown{
+    margin-top:30px;padding-top:22px;
+    border-top:1px dashed rgba(196,98,45,.35);
+    text-align:center;
+  }
+  .cd-label{
+    font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--soft);font-weight:500;
+  }
+  .cd-timer{
+    margin-top:8px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(1.8rem,4.4vw,2.4rem);
+    font-weight:600;color:var(--rust);
+    font-variant-numeric:tabular-nums;
+    white-space:nowrap;
+  }
+  .cd-timer .cd-days{font-weight:500}
+  .card.kid .cd-timer{color:var(--olive)}
+  .gift-card .countdown{border-top-color:rgba(138,59,47,.25)}
+  .gift-card .cd-timer{color:var(--burgundy)}
+
   /* ---------- появление при скролле ---------- */
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
   .reveal.visible{opacity:1;transform:none}
@@ -183,6 +206,10 @@
           <p>Есть дни, которые хочется просто остановить и пересматривать, как любимый фильм. Сегодня — один из них. Спасибо тебе за то, что рядом с тобой даже обычный четверг ощущается как праздник, а осень — не время увядать, а время укутываться в плед, обнимать друг друга и пить чай, который остыл, потому что мы слишком долго разговаривали.</p>
           <p>Ты — моё самое смелое решение и моя самая тихая гавань. Пусть в этом сезоне у тебя будет больше поводов улыбаться, чем поводов уставать, а все твои «как же я вымоталась сегодня» заканчиваются фразой «но с тобой — хорошо».</p>
         </div>
+        <div class="countdown" id="cd-wife">
+          <div class="cd-label">до самого теплого дня этой осени осталось</div>
+          <div class="cd-timer"><span class="cd-days"></span><span class="cd-hms"></span></div>
+        </div>
         <div class="signature">— с любовью, навсегда твой муж</div>
       </div>
     </section>
@@ -193,6 +220,10 @@
         <div class="body-text">
           <p>Эй, герой! Осень — это когда мир превращается в огромную оранжевую карту сокровищ: листья шуршат, как фанфары, а каждое каштановое дерево прячет свою тайну. Ты делаешь нашу семью громче, смешнее и настоящей — и это лучшая суперспособность, которую я знаю.</p>
           <p>Расти, мечтай, задавай тысячу вопросов в минуту — мы всегда рядом, чтобы выслушать каждый.</p>
+        </div>
+        <div class="countdown" id="cd-son">
+          <div class="cd-label">до самого жаркого дня зимы осталось</div>
+          <div class="cd-timer"><span class="cd-days"></span><span class="cd-hms"></span></div>
         </div>
         <div class="signature">— твой папа</div>
       </div>
@@ -214,6 +245,10 @@
               <dt>Даты:</dt><dd>15.12.2026 16:00 — 17.12.2026 12:00</dd>
               <dt>Номер брони:</dt><dd>415929</dd>            
             </dl>
+            <div class="countdown" id="cd-gift">
+              <div class="cd-label">до семейного отдыха осталось</div>
+              <div class="cd-timer"><span class="cd-days"></span><span class="cd-hms"></span></div>
+            </div>
             <p class="gift-note">Зай, теплого и уютного отыха тебе.</p>
           </div>
         </div>
@@ -234,6 +269,50 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: .15 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ---------- счётчики: дни, часы, минуты, секунды ----------
+  const counters = [
+    { id: 'cd-wife', target: new Date(2026, 10, 30, 0, 0, 0), done: 'уже сегодня ✨' },
+    { id: 'cd-son',  target: new Date(2026, 11, 3, 0, 0, 0),  done: 'уже сегодня ✨' },
+    { id: 'cd-gift', target: new Date(2026, 11, 15, 16, 0, 0), done: 'отпуск начался ✨' },
+  ];
+
+  function pluralDays(n) {
+    const mod10 = n % 10, mod100 = n % 100;
+    if (mod10 === 1 && mod100 !== 11) return 'день';
+    if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return 'дня';
+    return 'дней';
+  }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const now = new Date();
+    counters.forEach(c => {
+      const box = document.getElementById(c.id);
+      if (!box) return;
+      const daysEl = box.querySelector('.cd-days');
+      const hmsEl = box.querySelector('.cd-hms');
+      let diff = c.target - now;
+
+      if (diff <= 0) {
+        daysEl.textContent = c.done;
+        hmsEl.textContent = '';
+        return;
+      }
+
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor(diff / 3600000) % 24;
+      const mins = Math.floor(diff / 60000) % 60;
+      const secs = Math.floor(diff / 1000) % 60;
+
+      daysEl.textContent = days + ' ' + pluralDays(days) + ' · ';
+      hmsEl.textContent = pad(hours) + ':' + pad(mins) + ':' + pad(secs);
+    });
+  }
+
+  tick();
+  setInterval(tick, 1000);
 </script>
 </body>
 </html>
