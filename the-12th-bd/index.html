@@ -195,6 +195,24 @@ h2 .bat-sm{font-size:.7em; vertical-align:middle}
   .s-bike{right:-86px; top:2px}.s-lb{left:-86px}
   .s-fish{left:-84px}.s-heart{right:-84px}
   .s-burger{left:-84px}.s-fish2{right:-84px}
+
+  /* стикеры на телефоне: из-краёв — в ряд над заголовком */
+  section{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 8px;
+    justify-content:center;
+  }
+  section > *{width:100%;}      /* обычное содержимое — на всю ширину */
+  .sticker{
+    position:static;             /* больше не абсолютные */
+    order:-1;                    /* встают в начало секции */
+    width:auto;
+    flex:0 0 auto;
+    animation:none;
+    --rot:0deg;
+    transform:none;
+  }
 }
 /* ===== карточки пожеланий ===== */
 .wish{
@@ -298,7 +316,7 @@ h2 .bat-sm{font-size:.7em; vertical-align:middle}
 .gift-stage.open .gift-box{
   position:absolute;
   left:auto;
-  right:17%;
+  right:5%;
   bottom:10px;
   transform:scale(.62);
   opacity:1;
@@ -417,48 +435,6 @@ footer .ps{margin-top:12px; color:var(--bone); opacity:.8; font-size:15px}
 
 <!-- ПОЖЕЛАНИЯ ОТ ПАПЫ -->
 <section id="wishes">
-  <div class="sticker s-fin">
-    <svg viewBox="0 0 100 76">
-      <path d="M18 12 Q10 40 22 66 Q30 70 36 64 Q28 38 34 14 Z" fill="#2aa79b" stroke="#0d0b0c" stroke-width="3"/>
-      <path d="M50 8 Q44 40 58 68 Q66 72 72 66 Q62 36 66 10 Z" fill="#37c4b6" stroke="#0d0b0c" stroke-width="3"/>
-      <rect x="14" y="10" width="26" height="9" rx="4" fill="#0d0b0c"/>
-      <rect x="46" y="6" width="26" height="9" rx="4" fill="#0d0b0c"/>
-    </svg>
-    <span class="cap">ласты — быстро<br>в воду!</span>
-  </div>
-  <div class="sticker s-fin2">
-    <svg viewBox="0 0 100 76">
-      <path d="M18 12 Q10 40 22 66 Q30 70 36 64 Q28 38 34 14 Z" fill="#2aa79b" stroke="#0d0b0c" stroke-width="3"/>
-      <path d="M50 8 Q44 40 58 68 Q66 72 72 66 Q62 36 66 10 Z" fill="#37c4b6" stroke="#0d0b0c" stroke-width="3"/>
-      <rect x="14" y="10" width="26" height="9" rx="4" fill="#0d0b0c"/>
-      <rect x="46" y="6" width="26" height="9" rx="4" fill="#0d0b0c"/>
-    </svg>
-    <span class="cap">и снова — в воду!</span>
-  </div>
-  <div class="sticker s-bike">
-    <svg viewBox="0 0 120 92">
-      <circle cx="26" cy="68" r="15" fill="none" stroke="#0d0b0c" stroke-width="5"/>
-      <circle cx="98" cy="68" r="15" fill="none" stroke="#0d0b0c" stroke-width="5"/>
-      <path d="M26 68 L52 34 L86 34 L98 68 M52 34 L58 68 L26 68" fill="none" stroke="#ff6fa5" stroke-width="5" stroke-linecap="round"/>
-      <path d="M86 34 L82 22" stroke="#ff6fa5" stroke-width="5" stroke-linecap="round"/>
-      <path d="M74 22 L90 22" stroke="#ff6fa5" stroke-width="5" stroke-linecap="round"/>
-      <path d="M50 32 L56 32" stroke="#ff6fa5" stroke-width="6" stroke-linecap="round"/>
-      <rect x="72" y="16" width="30" height="16" rx="3" fill="#e8b64c" stroke="#0d0b0c" stroke-width="2.5"/>
-      <circle cx="80" cy="12" r="4" fill="#ff6fa5"/><circle cx="88" cy="9" r="4" fill="#f6c8d8"/><circle cx="95" cy="12" r="4" fill="#ff6fa5"/>
-    </svg>
-    <span class="cap">розовый велик<br>с корзинкой</span>
-  </div>
-  <div class="sticker s-lb">
-    <svg viewBox="0 0 110 70">
-      <g transform="rotate(-6 55 35)">
-        <path d="M10 34 Q55 20 100 34 Q104 40 98 44 Q55 34 14 42 Q6 40 10 34 Z" fill="#7a4fc9" stroke="#0d0b0c" stroke-width="3"/>
-        <circle cx="28" cy="50" r="8" fill="#ffd23f" stroke="#0d0b0c" stroke-width="3"/>
-        <circle cx="84" cy="50" r="8" fill="#ffd23f" stroke="#0d0b0c" stroke-width="3"/>
-      </g>
-    </svg>
-    <span class="cap">лонгборд —<br>ветер в лицо</span>
-  </div>
-
   <h2>Мои пожелания <span class="bat-sm">🖤</span></h2>
 
   <div class="wish"><p><span class="ico">🧠</span>Ты умная — по-настоящему, цепко, с вопросами на три шага вперёд. Я хочу, чтобы любопытство никогда не заканчивалось: пусть тебе всегда будет интересно «а как это устроено» и «а что будет, если».</p><span class="sign">— папа</span></div>
@@ -496,6 +472,48 @@ footer .ps{margin-top:12px; color:var(--bone); opacity:.8; font-size:15px}
 
 <!-- ГЛИНА, ИТ, ХОРРОРЫ -->
 <section id="hands">
+  <div class="sticker s-fin">
+    <svg viewBox="0 0 100 76">
+      <path d="M18 12 Q10 40 22 66 Q30 70 36 64 Q28 38 34 14 Z" fill="#2aa79b" stroke="#0d0b0c" stroke-width="3"/>
+      <path d="M50 8 Q44 40 58 68 Q66 72 72 66 Q62 36 66 10 Z" fill="#37c4b6" stroke="#0d0b0c" stroke-width="3"/>
+      <rect x="14" y="10" width="26" height="9" rx="4" fill="#0d0b0c"/>
+      <rect x="46" y="6" width="26" height="9" rx="4" fill="#0d0b0c"/>
+    </svg>
+    <span class="cap">ласты — быстро<br>в воду!</span>
+  </div>
+  <div class="sticker s-bike">
+    <svg viewBox="0 0 120 92">
+      <circle cx="26" cy="68" r="15" fill="none" stroke="#0d0b0c" stroke-width="5"/>
+      <circle cx="98" cy="68" r="15" fill="none" stroke="#0d0b0c" stroke-width="5"/>
+      <path d="M26 68 L52 34 L86 34 L98 68 M52 34 L58 68 L26 68" fill="none" stroke="#ff6fa5" stroke-width="5" stroke-linecap="round"/>
+      <path d="M86 34 L82 22" stroke="#ff6fa5" stroke-width="5" stroke-linecap="round"/>
+      <path d="M74 22 L90 22" stroke="#ff6fa5" stroke-width="5" stroke-linecap="round"/>
+      <path d="M50 32 L56 32" stroke="#ff6fa5" stroke-width="6" stroke-linecap="round"/>
+      <rect x="72" y="16" width="30" height="16" rx="3" fill="#e8b64c" stroke="#0d0b0c" stroke-width="2.5"/>
+      <circle cx="80" cy="12" r="4" fill="#ff6fa5"/><circle cx="88" cy="9" r="4" fill="#f6c8d8"/><circle cx="95" cy="12" r="4" fill="#ff6fa5"/>
+    </svg>
+    <span class="cap">розовый велик<br>с корзинкой</span>
+  </div>
+  <div class="sticker s-fin2">
+    <svg viewBox="0 0 100 76">
+      <path d="M18 12 Q10 40 22 66 Q30 70 36 64 Q28 38 34 14 Z" fill="#2aa79b" stroke="#0d0b0c" stroke-width="3"/>
+      <path d="M50 8 Q44 40 58 68 Q66 72 72 66 Q62 36 66 10 Z" fill="#37c4b6" stroke="#0d0b0c" stroke-width="3"/>
+      <rect x="14" y="10" width="26" height="9" rx="4" fill="#0d0b0c"/>
+      <rect x="46" y="6" width="26" height="9" rx="4" fill="#0d0b0c"/>
+    </svg>
+    <span class="cap">и снова — в воду!</span>
+  </div>
+  <div class="sticker s-lb">
+    <svg viewBox="0 0 110 70">
+      <g transform="rotate(-6 55 35)">
+        <path d="M10 34 Q55 20 100 34 Q104 40 98 44 Q55 34 14 42 Q6 40 10 34 Z" fill="#7a4fc9" stroke="#0d0b0c" stroke-width="3"/>
+        <circle cx="28" cy="50" r="8" fill="#ffd23f" stroke="#0d0b0c" stroke-width="3"/>
+        <circle cx="84" cy="50" r="8" fill="#ffd23f" stroke="#0d0b0c" stroke-width="3"/>
+      </g>
+    </svg>
+    <span class="cap">лонгборд —<br>ветер в лицо</span>
+  </div>
+
   <h2>Из чего ты сделана</h2>
 
   <div class="wish"><p><span class="ico">🧤🧱🐡🍔🤲</span>Глина в твоих руках оживает: рыба-шар, сердце, бургер — я смотрю на твои работы и не перестаю удивляться. Руки, которые умеют создавать, — это большое богатство.</p><span class="sign">— папа</span></div>
